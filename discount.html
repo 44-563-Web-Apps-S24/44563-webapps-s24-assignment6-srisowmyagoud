@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>Dis page</title>
+ </head>
+<body>
+<h1>Sri Sowmya Polampalli discount calculations</h1>
+<h2>Getting input</h2>
+<label for="cost">Enter price per</label>
+<input type="number" name="cost" id="cost" value="10"><br>
+<label for="number">Enter no of items</label>
+<input type="number" name="number" id="number" value="9"><br>
+<label for="dis">Enter the discount percent</label>
+<input type="number" name="dis" id="dis" value="5"><br>
+<input type="button" onclick="discount()" value="Show total">
+<p id="outcome">outcome</p>
+
+<form>
+    <label>
+    <input type="radio" name="operation" value="sum" onClick="chooseOp()"> sum
+    </label><br>
+    <label>
+    <input type="radio" name="operation" value="mult" onClick="chooseOp()"> mult
+    </label><br>
+    <label>
+    <input type="radio" name="operation" value="exp" onClick="chooseOp()"> exp
+    </label><br>
+    </form>
+    
+<p id="output">outrput</p>
+<script> 
+
+
+function discount()
+{
+    var price = document.getElementById("cost").value
+    var number = document.getElementById("number").value
+    var discount = document.getElementById("dis").value
+    var sum,dis;
+    
+    var myOutput = "";
+    for (let index = 0; index < 5; index++) {
+        sum= price*number;
+        dis=(sum*discount)/100;
+        sum = sum-dis;
+        myOutput+=discount+"%"+"is"+sum+"; ";
+        
+        discount++;
+    }
+    document.getElementById("outcome").innerHTML = "Total are: "+myOutput;   
+}
+function chooseOp()
+{
+            var p= parseFloat(document.getElementById("cost").value);
+            var d = parseFloat(document.getElementById("dis").value);
+            var operation = document.querySelector('input[name="operation"]:checked').value;
+            var result;
+            var operationSign;
+ 
+            switch (operation) {
+                case "sum":
+                    result = p + d;
+                    operationSign = "+";
+                    break;
+                case "mult":
+                    result = p * d;
+                    operationSign = "*";
+                    break;
+                case "exp":
+                    result = p ** d;
+                    operationSign = "**";
+                    break;
+                default:
+                    result = "Invalid operation";
+                    operationSign = "";
+                    break;
+            }
+ 
+            var outputMessage = ` ${operation} of ${p} and ${d} is  ${result}`;
+            document.getElementById("output").textContent = "Result: " + result;
+            document.getElementById("output").textContent = outputMessage;
+        }
+    
+
+
+</script>
+
+</body>
+</html>

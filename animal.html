@@ -5,64 +5,84 @@
     </head>
  
 <body>
-<h1>Animal game by Sri Sowmya Polampalli </h1>
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
+<h1>Animal game by Sri Sowmya Polampalli</h1>
+<h2>Getting input</h2
+    <form>
+        <label for="hiddenAnimal">The hidden animal type:</label>
+        <input type="password" id="hiddenAnimal" value="Chicken">
+    
+        <br>
+    
+        <label for="guessAnimal">Guess the animal:</label>
+        <input type="text" id="guessAnimal">
+    
+        <br>
+    
+        
+        <input type="button" class="bg-primary text-dark" value="Check the Guess" onclick="Checktheguess()">
 
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
 
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
-<form >
-    <label for="hiddenAnimal">The hidden animal type:</label>
-    <input type="password" id="hiddenAnimal" value="Chicken" required>
-    <br>
-    <label for="guessAnimal">Guess the animal:</label>
-    <input type="text" id="guessAnimal" required>
-    <br>
-    <button type="button" onclick="checkAnimal()">Check the guess</button>
-</form>
-<div id="result"></div>
-
-<p id="result">This text will be replaced </p>
-<script> 
-        let correct = 0;
+    </form>
+    
+    <div id="result">
+        <p>Correct: <span id="correctCount">0</span></p>
+        <p>Wrong: <span id="wrongCount">0</span></p>
+    </div>
+    <div>
+        <button type="button"><img src="pepsi.png" alt="Pepsi" onclick="selectImage()" id="image" width="150" height="150" ></button>
+    </div>
+    
+    <script>
+        // Global variables
         let wrong = 0;
-        function checkAnimal()
-        {
-            const hiddenAnimal = document.getElementById('hiddenAnimal').value.toLowerCase();
-            const guessedAnimal = document.getElementById('guessAnimal').value.toLowerCase();
-            if (hiddenAnimal === guessedAnimal)
-            {
+        let correct = 0;
+        //let useimage = 1;
+        // Function to check the guessed animal
+        function checkAnimal() {
+            // Get values from input elements
+            const hiddenAnimalValue = document.getElementById('hiddenAnimal').value;
+            const guessAnimalValue = document.getElementById('guessAnimal').value;
+    
+            // Compare values and update counts
+            if (hiddenAnimalValue.toLowerCase() === guessAnimalValue.toLowerCase()) {
                 correct++;
                 alert("Ruff ruff");
-            } 
-            else 
-            {
+            } else {
                 wrong++;
                 alert("Grrrr");
             }
-            const resultElement = document.getElementById('result');
-            resultElement.innerHTML = Correct: ${correct},Wrong: ${wrong};
-        }
-        function resolveForm ()
-        {
-            console.log("Getting form values")
-            age = document.getElementById("form1_age").value
-            nick = document.getElementById("form1_nick").value
-            confirmed = confirm("Are these the values? "+age+" and "+nick)
+            if(wrong>correct)
+            {
+                document.getElementById("result").innerHTML =  "Sorry, too many wrong guesses.";
+            }
     
-            out = document.getElementById("result")
-            if(confirmed)
-            {
-                out.innerHTML = "Values were confirmed"
-            } 
-            else 
-            {
-                out.innerHTML = "Values were not confirmed"
+            // Update the innerHTML for the result container
+            document.getElementById('correctCount').innerHTML = correct;
+          
+            document.getElementById('wrongCount').innerHTML = wrong;
+        }
+        var useImage=1;
+        function selectImage()
+        {
+            switch (useImage) {
+                case 1:
+                    document.getElementById("image").src="orangejuice.png";
+                    useImage=2;
+                    break;
+                case 2:
+                    document.getElementById("image").src = "mountaindew.png";
+                    useImage=3;
+                    break;
+                case 3:
+                     document.getElementById("image").src = "pepsi.png";   
+                     useImage=1;
+                    break;
+            
+                default:
+                    break;
             }
         }
-</script>
-</body>
+    </script>
+    
+    </body>
+    </html> 
